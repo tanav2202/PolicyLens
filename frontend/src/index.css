@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 18px;
+  }
+  body {
+    @apply text-zinc-100 antialiased;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(135deg, #000 0%, #0a0a0a 25%, #000 50%, #0a0a0a 75%, #000 100%);
+  background-size: 400% 400%;
+  animation: bg-drift 12s ease-in-out infinite;
+}
+
+@keyframes bg-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
