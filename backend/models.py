@@ -17,7 +17,7 @@ class ExtractedSlots(BaseModel):
 
 class IntentClassification(BaseModel):
     """Strict JSON schema for Ollama output - intent classification only."""
-    intent: str = Field(..., description="One of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope")
+    intent: str = Field(..., description="One of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, general_policy, out_of_scope")
     slots: ExtractedSlots = Field(default_factory=ExtractedSlots)
     confidence: float = Field(ge=0, le=1, default=1.0)
 

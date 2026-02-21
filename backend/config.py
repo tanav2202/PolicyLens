@@ -14,6 +14,7 @@ DEFAULT_KEY_MAP = {
     "coordinator": "coordinator",
     "ta_list": "tas",
     "links": "links",
+    "general_policy": "general_policies",
 }
 
 
@@ -71,6 +72,6 @@ def get_facts_db_path(course: Optional[str] = None) -> Path:
     return DATA_DIR / f"{safe}_facts_db.json"
 
 # Ollama settings - Model usage policy: temperature 0 for deterministic routing
-OLLAMA_MODEL = "llama3.2"
+OLLAMA_MODEL = "mistral:latest"
 OLLAMA_TEMPERATURE = 0
 OLLAMA_HOST = "http://localhost:11434"
