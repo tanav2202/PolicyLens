@@ -1,0 +1,55 @@
+{
+  "due_dates": [
+    {"assessment": "syllabus_quiz", "due_date": "Jan 19 (extended), 11:59 pm", "where_find": "PrairieLearn (access through Canvas tab)", "where_submit": "Canvas tab", "quote": "Syllabus quiz | Jan 19 (extended), 11:59 pm | PrairieLearn (access through Canvas tab) | (access through Canvas tab)", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw1", "due_date": "Jan 12, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw1 | Jan 12 , 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw2", "due_date": "Jan 19, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw2 | Jan 19, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw3", "due_date": "Feb 02, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw3 | Feb 02, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw4", "due_date": "Feb 09, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw4 | Feb 09, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "midterm_1", "due_date": "Feb 9, 10, 11", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Midterm 1 | Feb 9, 10, 11 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw5", "due_date": "Mar 02, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "note": "excluded from drop lowest grade", "quote": "hw5 | Mar 02, 11:59 pm | GitHub repo | Gradescope | excluded from drop lowest grade", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw6", "due_date": "Mar 09, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw6 | Mar 09, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "midterm_2", "due_date": "Mar 16-17-18", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Midterm 2 | Mar 16-17-18 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw7", "due_date": "Mar 23, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw7 | Mar 23, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw8", "due_date": "Mar 30, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw8 | Mar 30, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
+    {"assessment": "hw9", "due_date": "Apr 10, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "note": "No late submissions", "quote": "hw9 | Apr 10, 11:59 pm | GitHub repo | Gradescope | No late submissions", "source": "cpsc_330_rules.md"},
+    {"assessment": "final_exam", "due_date": "TBA", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Final exam | TBA | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"}
+  ],
+  "instructors": [
+    {"section": "201", "instructor": "Giulia Toti", "contact": "gtoti@cs.ubc.ca", "when": "Tue & Thu, 9:30–10:50", "where": "MCML 360", "quote": "201 | Giulia Toti | gtoti@cs.ubc.ca | Tue & Thu, 9:30–10:50 | MCML 360", "source": "cpsc_330_rules.md"},
+    {"section": "202", "instructor": "Firas Moosvi", "contact": "Ed Discussion", "when": "Tue & Thu, 15:30–16:50", "where": "DMP 310", "quote": "202 | Firas Moosvi | Ed Discussion | Tue & Thu, 15:30–16:50 | DMP 310", "source": "cpsc_330_rules.md"},
+    {"section": "203", "instructor": "Mehrdad Oveisi", "contact": "moveisi@cs.ubc.ca", "when": "Tue & Thu, 17:00–18:20", "where": "SWNG 222", "quote": "203 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 17:00–18:20 | SWNG 222", "source": "cpsc_330_rules.md"},
+    {"section": "204", "instructor": "Mehrdad Oveisi", "contact": "moveisi@cs.ubc.ca", "when": "Tue & Thu, 11:00–12:20", "where": "DMP 310", "quote": "204 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 11:00–12:20 | DMP 310", "source": "cpsc_330_rules.md"}
+  ],
+  "coordinator": [
+    {"name": "Anca Barbu", "email": "cpsc330-admin@cs.ubc.ca", "purpose": "admin questions, extensions, academic concessions", "quote": "Anca Barbu (cpsc330-admin@cs.ubc.ca), please reach out to the course coordinator for: admin questions, extensions, academic concessions etc.", "source": "cpsc_330_rules.md"}
+  ],
+  "links": [
+    {"name": "Course GitHub", "url": "https://github.com/UBC-CS/cpsc330-2025W2", "quote": "Course GitHub page", "source": "cpsc_330_rules.md"},
+    {"name": "Course Jupyter book", "url": "https://ubc-cs.github.io/cpsc330-2025W2", "quote": "Course Jupyter book", "source": "cpsc_330_rules.md"},
+    {"name": "Canvas", "url": "https://canvas.ubc.ca/courses/178047", "quote": "Canvas", "source": "cpsc_330_rules.md"},
+    {"name": "Ed Discussion", "url": "https://edstem.org/us/courses/89791/discussion", "quote": "Ed Discussion", "source": "cpsc_330_rules.md"},
+    {"name": "Gradescope", "url": "https://www.gradescope.ca/courses/34465", "quote": "Gradescope", "source": "cpsc_330_rules.md"},
+    {"name": "Course videos YouTube", "url": "https://www.youtube.com/playlist?list=PLHofvQE1VlGtZoAULxcHb7lOsMved0CuM", "quote": "Course videos YouTube channel", "source": "cpsc_330_rules.md"},
+    {"name": "Syllabus", "url": "syllabus.md", "quote": "Syllabus / administrative info", "source": "cpsc_330_rules.md"}
+  ],
+  "tas": [
+    {"name": "Ayanfe Adekanye"},
+    {"name": "Hadi Babalou"},
+    {"name": "Tanav Singh Bajaj"},
+    {"name": "Aryan Ballani"},
+    {"name": "Matthew Buchholz"},
+    {"name": "Jun He Cui"},
+    {"name": "Niki Duan"},
+    {"name": "Atabak Eghbal"},
+    {"name": "Eshed Gal"},
+    {"name": "Neo Ghassemi"},
+    {"name": "Zoe Harris"},
+    {"name": "Kanwal Mehreen"},
+    {"name": "Himanshu Mishra"},
+    {"name": "Kimia Rostin"},
+    {"name": "Sneha Sambandam"},
+    {"name": "Sohbat Sandhu"},
+    {"name": "Joseph Soo"},
+    {"name": "Carlos Vasquez Rios"}
+  ]
+}
