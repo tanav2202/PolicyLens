@@ -1,61 +1,27 @@
 # PolicyLens
 
-A course policy question-answering system that helps students find accurate information about course policies, due dates, instructors, and program rules. PolicyLens combines LLM-based intent classification with a structured facts database to provide accurate, citable responses.
+A course policy QA system that helps students find accurate information about course policies, due dates, instructors, and program rules. PolicyLens combines LLM based intent classification with a structured facts database to provide accurate, citable responses.
 
 ## Overview
 
-PolicyLens routes user queries through an LLM classifier, then retrieves answers from a curated facts database. The LLM never generates factual content—it only classifies intent and extracts query parameters. All factual answers come from structured JSON databases built from course policy documents.
+PolicyLens routes user queries through an LLM classifier, then retrieves answers from a curated facts database. The LLM never generates factual content, it only classifies intent and extracts query parameters. All factual answers come from structured JSON databases built from course policy documents.
 
 ## Features
 
 - **Accurate Q&A**: Answers sourced from structured course policy databases
 - **Multiple Course Support**: Query policies for different courses via dropdown selection
-- **Streaming Responses**: Real-time word-by-word answer streaming
+- **Streaming Responses**: Real time word by word answer streaming
 - **Intent Classification**: Routing to policy categories (due dates, instructors, links, general policies)
-- **Fallback Handling**: Graceful handling of out-of-scope queries with helpful guidance
+- **Fallback Handling**: Graceful handling of out of scope queries with helpful guidance
 - **Policy Extraction**: Tools to extract and structure policy data from web pages
 
 ## Architecture
 
-PolicyLens has four main components:
+**Frontend**: React + TypeScript + Vite + Tailwind. Chat UI with course selection and streaming responses.
 
-### 1. Frontend (React/TypeScript)
+**Backend**: FastAPI server that routes queries to Ollama for intent classification, then looks up answers from a facts database. Uses markdown fallback when JSON has no match.
 
-**Location**: `frontend/`
-
-- Real-time streaming chat interface
-- Course selection dropdown
-- Persistent chat history (localStorage)
-- Responsive design with Tailwind CSS
-
-**Tech Stack**: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Framer Motion, React Markdown, Lucide React
-
-### 2. Backend API (FastAPI)
-
-**Location**: `backend/`
-
-RESTful API for query processing, intent classification, and facts retrieval.
-
-**Tech Stack**: FastAPI, Uvicorn, Pydantic, HTTPX
-
-**Key Services**: `ollama_router.py`, `facts_db.py`, `md_search.py`, `web_extractor.py`
-
-**Endpoints**: `POST /query`, `POST /query/stream`, `POST /extract`, `GET /courses`, `GET /health`, `GET /policy`
-
-### 3. AI/LLM Services (Ollama)
-
-**Location**: `backend/services/ollama_router.py`
-
-Local LLM for intent classification and slot extraction only. Uses `mistral:latest` at temperature 0. Classifies intent (e.g. `due_date`, `general_policy`, `links`, `greeting`, `out_of_scope`) and extracts slots (assessment, topic, section). Never generates factual answers.
-
-### 4. Data Processing Pipeline (Python Scripts)
-
-**Location**: `scripts/`
-
-- `extract_policy_md.py` - Web page → Markdown (`data/*_rules.md`)
-- `extract_facts_from_md.py` - Markdown → structured JSON (`data/*_facts.json`)
-
-**Tech Stack**: Python 3, BeautifulSoup4, Markdownify
+**Data Pipeline**: Scripts extract policy pages from URLs → Markdown → structured JSON. Facts are stored in `data/*_facts.json`.
 
 ## Project Structure
 
@@ -101,7 +67,8 @@ cd frontend && npm install
 
 ### Example Questions
 
-- "When is hw1 due?"
+- "When are my homeworks due?"
+- "How do you not fail in MDS?"
 - "Who are the instructors?"
 - "What's the late submission policy?"
 - "Where can I find the course materials?"
@@ -124,11 +91,11 @@ python scripts/extract_facts_from_md.py data/mds_rules.md -o data/mds_facts.json
 
 ## How It Works
 
-1. **User Query** → Frontend sends question to backend
-2. **Intent Classification** → Ollama classifies intent and extracts slots
-3. **Facts Lookup** → Backend queries course-specific facts database
-4. **Fallback** → If no match, searches markdown files (confidence ≥ 0.8)
-5. **Response** → Answer streamed back with citations (logged in API)
+1. **User Query**: Frontend sends question to backend
+2. **Intent Classification**: Ollama classifies intent and extracts slots
+3. **Facts Lookup**: Backend queries course-specific facts database
+4. **Fallback**: If no match, searches markdown files (confidence ≥ 0.8)
+5. **Response**: Answer streamed back with citations (logged in API)
 
 ### Facts Database
 
@@ -138,5 +105,4 @@ python scripts/extract_facts_from_md.py data/mds_rules.md -o data/mds_facts.json
 
 ### Model Usage Policy
 
-- ✅ Intent classification, slot extraction
-- ❌ Not for generating factual answers or inventing dates/policies/emails
+The LLM is used only for intent classification and slot extraction. It never generates factual answers, dates, policies, or contact information. All factual content comes from validated sources in the facts database.
