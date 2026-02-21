@@ -79,6 +79,41 @@ def _get_entries(facts: dict, intent: str, meta: dict) -> list[dict]:
     return normalized
 
 
+def get_due_dates_for_ics_export(
+    course: str,
+    assessments_filter: Optional[list[str]] = None,
+) -> tuple[list[dict], str, int]:
+    """
+    Get due date entries for ICS export.
+    Returns (entries, course_name, academic_year).
+    Raises FileNotFoundError if course not found.
+    """
+    facts, meta = _load_facts(course)
+    entries = _get_entries(facts, "due_date", meta)
+
+    path = _get_facts_path(course)
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    schema = data.get("_schema") or {}
+    course_name = schema.get("course_name") or course
+    year = schema.get("academic_year")
+    if year is None:
+        from datetime import datetime
+        year = datetime.now().year
+
+    if assessments_filter:
+        norm_filter = {_normalize_assessment(a) for a in assessments_filter if a}
+        filtered = []
+        for e in entries:
+            a = e.get("assessment", e.get("item", ""))
+            norm_a = _normalize_assessment(str(a).replace("*", "").strip())
+            if norm_a and norm_a in norm_filter:
+                filtered.append(e)
+        entries = filtered
+
+    return (entries, course_name, year)
+
+
 def _normalize_assessment(s: Optional[str]) -> Optional[str]:
     """Normalize assessment names for lookup."""
     if not s:

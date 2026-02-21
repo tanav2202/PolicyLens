@@ -13,14 +13,15 @@ import json
 import random
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
 
 from backend.config import discover_courses
 from backend.models import QueryRequest, QueryResponse
 from backend.services.ollama_router import classify_intent
-from backend.services.facts_db import lookup_facts
+from backend.services.facts_db import get_due_dates_for_ics_export, lookup_facts
+from backend.services.ics_generator import generate_ics
 from backend.services.md_search import get_fallback_message
 
 app = FastAPI(
@@ -49,6 +50,7 @@ def root():
             "courses": "GET /courses",
             "query": "POST /query",
             "query_stream": "POST /query/stream",
+            "export_ics": "GET /export/ics",
             "policy": "GET /policy",
         },
     }
@@ -64,6 +66,39 @@ def health():
 def courses():
     """List available courses (from data/*_facts.json)."""
     return {"courses": list(discover_courses().keys())}
+
+
+@app.get("/export/ics")
+def export_ics(
+    course: str = Query(..., description="Course name, e.g. CPSC 330"),
+    assessments: str | None = Query(None, description="Comma-separated assessments to include, or omit for all"),
+):
+    """
+    Export due dates as ICS calendar file for Google/Apple Calendar.
+    Skips TBA entries. Returns 404 if course not found.
+    """
+    if not course or not course.strip():
+        return Response(status_code=400, content="Missing required parameter: course")
+
+    course = course.strip()
+    courses_map = discover_courses()
+    if course not in courses_map:
+        return Response(status_code=404, content=f"Course not found: {course}")
+
+    assessments_list = [a.strip() for a in assessments.split(",") if a.strip()] if assessments else None
+
+    try:
+        entries, course_name, year = get_due_dates_for_ics_export(course, assessments_list)
+    except FileNotFoundError:
+        return Response(status_code=404, content=f"Course not found: {course}")
+
+    ics_bytes = generate_ics(entries, course_name, year)
+    filename = "policy_dates.ics"
+    return Response(
+        content=ics_bytes,
+        media_type="text/calendar",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
 
 
 # Chitchat responses (LLM detects intent; we pick a safe reply)

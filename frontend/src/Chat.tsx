@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-type Message = { role: 'user' | 'assistant'; content: string }
+type Message = { role: 'user' | 'assistant'; content: string; intent?: string; slots_used?: Record<string, unknown> }
 
 const API_BASE = '/api'
 
@@ -64,6 +64,19 @@ export default function Chat() {
             })
           } else if (payload.type === 'citations' && payload.citations?.length) {
             // Citations kept in DB/API only; do not show sources in user-facing output
+          } else if (payload.type === 'done' && (payload.intent || payload.slots_used)) {
+            setMessages((m) => {
+              const next = [...m]
+              const last = next[next.length - 1]
+              if (last?.role === 'assistant') {
+                next[next.length - 1] = {
+                  ...last,
+                  intent: payload.intent ?? last.intent,
+                  slots_used: payload.slots_used ?? last.slots_used,
+                }
+              }
+              return next
+            })
           }
         } catch {
           // ignore parse errors for partial chunks
@@ -110,19 +123,35 @@ export default function Chat() {
           <p className="text-zinc-500 text-center py-16 text-lg">Ask a question about UBC policies.</p>
         )}
         {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
+          <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
             <div
-              className={`max-w-[85%] rounded-2xl px-5 py-3 text-lg leading-relaxed ${
-                msg.role === 'user'
-                  ? 'bg-blue-500 text-white rounded-br-md'
-                  : 'bg-green-600 text-white rounded-bl-md'
-              }`}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              {msg.content}
+              <div
+                className={`max-w-[85%] rounded-2xl px-5 py-3 text-lg leading-relaxed ${
+                  msg.role === 'user'
+                    ? 'bg-blue-500 text-white rounded-br-md'
+                    : 'bg-green-600 text-white rounded-bl-md'
+                }`}
+              >
+                {msg.content}
+              </div>
             </div>
+            {msg.role === 'assistant' && msg.intent === 'due_date' && course && (
+              <a
+                href={
+                  msg.slots_used?.assessment
+                    ? `${API_BASE}/export/ics?course=${encodeURIComponent(course)}&assessments=${encodeURIComponent(String(msg.slots_used.assessment))}`
+                    : `${API_BASE}/export/ics?course=${encodeURIComponent(course)}`
+                }
+                download="policy_dates.ics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 underline"
+              >
+                Add to Calendar
+              </a>
+            )}
           </div>
         ))}
         {loading && (
