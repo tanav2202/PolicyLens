@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 from typing import Any, Optional
 
+<<<<<<< Updated upstream
 from backend.config import DATA_DIR, get_course_facts_map, get_default_course, DEFAULT_KEY_MAP
 from backend.models import Citation
 
@@ -77,6 +78,19 @@ def _get_entries(facts: dict, intent: str, meta: dict) -> list[dict]:
                 n[k] = v
         normalized.append(n)
     return normalized
+=======
+from backend.config import get_facts_db_path
+from backend.models import Citation
+
+
+def _load_facts(course: Optional[str] = None) -> dict[str, Any]:
+    """Load facts from JSON for the given course. Raises FileNotFoundError if missing."""
+    path = get_facts_db_path(course)
+    if not path.exists():
+        raise FileNotFoundError(f"Facts DB not found for course: {course or 'default'}")
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+>>>>>>> Stashed changes
 
 
 def _normalize_assessment(s: Optional[str]) -> Optional[str]:
@@ -95,10 +109,16 @@ def _normalize_assessment(s: Optional[str]) -> Optional[str]:
     return aliases.get(s, s)
 
 
+<<<<<<< Updated upstream
 def lookup_due_date(assessment: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up due date for an assessment. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
     entries = _get_entries(facts, "due_date", meta)
+=======
+def lookup_due_date(assessment: Optional[str], facts: dict[str, Any]) -> tuple[str, list[Citation]]:
+    """Look up due date for an assessment. Returns (answer_text, citations)."""
+    entries = facts.get("due_dates", [])
+>>>>>>> Stashed changes
     citations: list[Citation] = []
 
     if not entries:
@@ -128,10 +148,16 @@ def lookup_due_date(assessment: Optional[str], course: Optional[str] = None) -> 
     return "Deliverable due dates:\n" + "\n".join(parts), citations
 
 
+<<<<<<< Updated upstream
 def lookup_instructor(section: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up instructor info. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
     entries = _get_entries(facts, "instructor_info", meta)
+=======
+def lookup_instructor(section: Optional[str], facts: dict[str, Any]) -> tuple[str, list[Citation]]:
+    """Look up instructor info. Returns (answer_text, citations)."""
+    entries = facts.get("instructors", [])
+>>>>>>> Stashed changes
     citations: list[Citation] = []
 
     if not entries:
@@ -158,10 +184,16 @@ def lookup_instructor(section: Optional[str], course: Optional[str] = None) -> t
     return "Instructors:\n" + "\n".join(parts), citations
 
 
+<<<<<<< Updated upstream
 def lookup_coordinator(course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up course coordinator. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
     entries = _get_entries(facts, "coordinator", meta)
+=======
+def lookup_coordinator(facts: dict[str, Any]) -> tuple[str, list[Citation]]:
+    """Look up course coordinator. Returns (answer_text, citations)."""
+    entries = facts.get("coordinator", [])
+>>>>>>> Stashed changes
     citations = []
     if not entries:
         return "No coordinator info in database for this course yet.", []
@@ -174,12 +206,18 @@ def lookup_coordinator(course: Optional[str] = None) -> tuple[str, list[Citation
     return text, citations
 
 
+<<<<<<< Updated upstream
 def lookup_ta_list(course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up TA list. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
     entries = _get_entries(facts, "ta_list", meta)
     if not entries:
         return "No TA list in database for this course yet.", []
+=======
+def lookup_ta_list(facts: dict[str, Any]) -> tuple[str, list[Citation]]:
+    """Look up TA list. Returns (answer_text, citations)."""
+    entries = facts.get("tas", [])
+>>>>>>> Stashed changes
     citations = []
     names = [e.get("name", e.get("ta", "")) for e in entries]
     quote = ", ".join(names)
@@ -188,12 +226,18 @@ def lookup_ta_list(course: Optional[str] = None) -> tuple[str, list[Citation]]:
     return "TAs: " + ", ".join(names), citations
 
 
+<<<<<<< Updated upstream
 def lookup_links(link_type: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up links. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
     entries = _get_entries(facts, "links", meta)
     if not entries:
         return "No links in database for this course yet.", []
+=======
+def lookup_links(link_type: Optional[str], facts: dict[str, Any]) -> tuple[str, list[Citation]]:
+    """Look up links. Returns (answer_text, citations)."""
+    entries = facts.get("links", [])
+>>>>>>> Stashed changes
     citations = []
 
     if link_type:
@@ -217,16 +261,23 @@ def lookup_links(link_type: Optional[str], course: Optional[str] = None) -> tupl
 
 def lookup_facts(intent: str, slots: dict, course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """
+<<<<<<< Updated upstream
     Look up facts by intent and slots. Tries JSON first, then MD fallback.
     Returns (answer_text, citations). Refuses (empty, []) for out_of_scope.
+=======
+    Look up facts by intent and slots for the given course. All answers come from DB only.
+    Returns (answer_text, citations). Raises FileNotFoundError if no facts DB for course.
+>>>>>>> Stashed changes
     """
     if intent == "out_of_scope":
         return "", []
 
+    facts = _load_facts(course)
     assessment = slots.get("assessment")
     section = slots.get("section")
     link_type = slots.get("link_type")
 
+<<<<<<< Updated upstream
     def _lookup():
         if intent == "due_date":
             return lookup_due_date(assessment, course)
@@ -245,6 +296,24 @@ def lookup_facts(intent: str, slots: dict, course: Optional[str] = None) -> tupl
                 [Citation(text=source, quote="Lecture schedule (tentative)", source=source)],
             )
         return "", []
+=======
+    if intent == "due_date":
+        return lookup_due_date(assessment, facts)
+    if intent == "instructor_info":
+        return lookup_instructor(section, facts)
+    if intent == "coordinator":
+        return lookup_coordinator(facts)
+    if intent == "ta_list":
+        return lookup_ta_list(facts)
+    if intent == "links":
+        return lookup_links(link_type, facts)
+    if intent in ("lecture_schedule", "reference_material"):
+        # Point to source doc - we don't have full schedule/reference in DB
+        return (
+            "See the full lecture schedule and reference material in cpsc_330_rules.md.",
+            [Citation(text="cpsc_330_rules.md", quote="Lecture schedule (tentative)", source="cpsc_330_rules.md")],
+        )
+>>>>>>> Stashed changes
 
     answer, citations = _lookup()
 

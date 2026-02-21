@@ -145,6 +145,7 @@ def _process_query(question: str, course: Optional[str]) -> QueryResponse:
             refused=False,
         )
 
+<<<<<<< Updated upstream
     # Chitchat intents: LLM detected greeting/thanks/bye/help; respond with fixed safe reply
     if classification.intent in _CHITCHAT_RESPONSES:
         choices = _CHITCHAT_RESPONSES[classification.intent]
@@ -154,6 +155,20 @@ def _process_query(question: str, course: Optional[str]) -> QueryResponse:
             intent=classification.intent,
             slots_used=classification.slots.model_dump(exclude_none=True),
             refused=False,
+=======
+    # 2. Lookup facts from DB only (no LLM factual generation), filtered by course
+    slots_dict = classification.slots.model_dump(exclude_none=True)
+    try:
+        answer, citations = lookup_facts(classification.intent, slots_dict, course=req.course)
+    except FileNotFoundError:
+        return QueryResponse(
+            answer="",
+            citations=[],
+            intent=classification.intent,
+            slots_used=slots_dict,
+            refused=True,
+            refusal_reason="No data for this course.",
+>>>>>>> Stashed changes
         )
 
     slots_dict = classification.slots.model_dump(exclude_none=True)

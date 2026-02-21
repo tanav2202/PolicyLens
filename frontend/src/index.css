@@ -4,20 +4,22 @@
 
 @layer base {
   html {
-    font-size: 18px;
+    font-size: 16px;
+    scroll-behavior: smooth;
   }
   body {
-    @apply text-zinc-100 antialiased;
+    @apply font-sans text-zinc-100 antialiased;
   }
 }
 
 .animated-bg {
-  background: linear-gradient(135deg, #000 0%, #0a0a0a 25%, #000 50%, #0a0a0a 75%, #000 100%);
-  background-size: 400% 400%;
-  animation: bg-drift 12s ease-in-out infinite;
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, rgba(30,27,75,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 80% at 80% 20%, rgba(15,23,42,0.4) 0%, transparent 45%),
+    linear-gradient(180deg, #0c0c0f 0%, #0a0a0c 100%);
 }
 
-@keyframes bg-drift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Preserve newlines in chat messages */
+.chat-message {
+  white-space: pre-wrap;
+  word-break: break-word;
 }

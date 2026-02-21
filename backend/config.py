@@ -61,6 +61,15 @@ def get_default_course() -> Optional[str]:
     m = get_course_facts_map()
     return next(iter(m)) if m else None
 
+
+def get_facts_db_path(course: Optional[str] = None) -> Path:
+    """Return facts DB path for the given course. Default = CPSC 330."""
+    if not course or course.strip().upper() == "CPSC 330":
+        return DATA_DIR / "facts_db.json"
+    # MDS -> data/MDS_facts_db.json; other courses same pattern
+    safe = course.strip().replace(" ", "_")
+    return DATA_DIR / f"{safe}_facts_db.json"
+
 # Ollama settings - Model usage policy: temperature 0 for deterministic routing
 OLLAMA_MODEL = "llama3.2"
 OLLAMA_TEMPERATURE = 0

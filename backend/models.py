@@ -27,7 +27,11 @@ class IntentClassification(BaseModel):
 class QueryRequest(BaseModel):
     """User query for course policy QA."""
     question: str = Field(..., min_length=1, max_length=2000)
+<<<<<<< Updated upstream
     course: Optional[str] = Field(None, description="Course name, e.g. CPSC 330, MDS. Used to select facts DB file.")
+=======
+    course: Optional[str] = Field(default="CPSC 330", description="Course to filter by, e.g. 'CPSC 330', 'MDS'")
+>>>>>>> Stashed changes
 
 
 class Citation(BaseModel):
