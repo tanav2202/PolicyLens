@@ -80,19 +80,34 @@ def _get_entries(facts: dict, intent: str, meta: dict) -> list[dict]:
 
 
 def _normalize_assessment(s: Optional[str]) -> Optional[str]:
-    """Normalize assessment names for lookup."""
+    """Normalize assessment names for lookup. Deterministic: map all variants to canonical key used in JSON."""
     if not s:
         return None
     s = s.lower().strip().replace(" ", "_").replace("-", "_")
     aliases = {
-        "hw1": "hw1", "homework1": "hw1", "homework 1": "hw1",
-        "hw2": "hw2", "homework2": "hw2",
-        "hw3": "hw3", "hw4": "hw4", "hw5": "hw5", "hw6": "hw6", "hw7": "hw7", "hw8": "hw8", "hw9": "hw9",
-        "midterm1": "midterm_1", "midterm 1": "midterm_1", "midterm_2": "midterm_2", "midterm 2": "midterm_2",
+        "hw1": "hw1", "homework1": "hw1", "homework_1": "hw1",
+        "hw2": "hw2", "homework2": "hw2", "homework_2": "hw2",
+        "hw3": "hw3", "homework3": "hw3", "homework_3": "hw3",
+        "hw4": "hw4", "homework4": "hw4", "homework_4": "hw4",
+        "hw5": "hw5", "homework5": "hw5", "homework_5": "hw5",
+        "hw6": "hw6", "homework6": "hw6", "homework_6": "hw6",
+        "hw7": "hw7", "homework7": "hw7", "homework_7": "hw7",
+        "hw8": "hw8", "homework8": "hw8", "homework_8": "hw8",
+        "hw9": "hw9", "homework9": "hw9", "homework_9": "hw9",
+        "midterm1": "midterm_1", "midterm_1": "midterm_1", "midterm_2": "midterm_2", "midterm 2": "midterm_2",
         "syllabus_quiz": "syllabus_quiz", "quiz": "syllabus_quiz",
         "final": "final_exam", "final_exam": "final_exam",
     }
     return aliases.get(s, s)
+
+
+def _entry_assessment_key(e: dict) -> str:
+    """Canonical key for matching: strip markdown, lower, normalize underscores."""
+    a = e.get("assessment", e.get("item", ""))
+    s = str(a).lower().replace("-", "_").replace(" ", "_")
+    for prefix in ("**", "*"):
+        s = s.replace(prefix, "")
+    return s.strip("_")
 
 
 def lookup_due_date(assessment: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
@@ -107,11 +122,12 @@ def lookup_due_date(assessment: Optional[str], course: Optional[str] = None) -> 
     if assessment:
         norm = _normalize_assessment(assessment)
         for e in entries:
-            a = e.get("assessment", e.get("item", ""))
-            if str(a).lower().replace("-", "_") == norm:
+            entry_key = _entry_assessment_key(e)
+            if entry_key == norm:
                 due = e.get("due_date", e.get("deadline", ""))
                 wf = e.get("where_find", e.get("instructions", ""))
                 ws = e.get("where_submit", e.get("submit_to", ""))
+                a = e.get("assessment", e.get("item", ""))
                 text = f"{a} is due {due}. Find it: {wf}. Submit: {ws}."
                 if e.get("note"):
                     text += f" Note: {e['note']}."
@@ -188,6 +204,43 @@ def lookup_ta_list(course: Optional[str] = None) -> tuple[str, list[Citation]]:
     return "TAs: " + ", ".join(names), citations
 
 
+def _normalize_topic(topic: str) -> str:
+    """Normalize for matching: lowercase, strip, drop trailing 'policy'/'policies'."""
+    t = (topic or "").lower().strip()
+    for suffix in (" policy", " policies"):
+        if t.endswith(suffix):
+            t = t[: -len(suffix)].strip()
+    return t
+
+
+def _topic_words(topic: str) -> set[str]:
+    """Split into words (min length 2) for word-overlap matching."""
+    t = _normalize_topic(topic)
+    return {w for w in t.split() if len(w) >= 2}
+
+
+# Meta questions: user wants the list of policies, not a single policy
+_LIST_TOPIC_PHRASES = (
+    "what info", "what do you have", "general policies", "list of policies",
+    "overview", "all policies", "which policies", "available policies",
+    "what are policies", "policies of this course", "policies of the course",
+    "policies of this", "course policies", "what policies",
+)
+# Single-word topic that means "list all" (don't include "policy" - would break "plagiarism policy")
+_LIST_TOPIC_SINGLE = frozenset({"policies", "info", "information", "overview", "list", "all"})
+
+
+def _is_list_request(topic_lower: str) -> bool:
+    """True if the topic indicates user wants the list of policies, not one policy."""
+    if not topic_lower or topic_lower in ("general policies", "general policy", "list", "overview"):
+        return True
+    if any(phrase in topic_lower for phrase in _LIST_TOPIC_PHRASES):
+        return True
+    if topic_lower.strip() in _LIST_TOPIC_SINGLE:
+        return True
+    return False
+
+
 def lookup_general_policy(topic: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up general (program-wide) policy by topic. Returns (answer_text, citations). Sources kept in DB only."""
     facts, meta = _load_facts(course)
@@ -197,19 +250,41 @@ def lookup_general_policy(topic: Optional[str], course: Optional[str] = None) ->
         return "No general policy entries in database for this course yet.", []
 
     topic_lower = (topic or "").lower().strip()
-    if not topic_lower:
+    if _is_list_request(topic_lower):
         parts = [f"• {e.get('title', '?')}" for e in entries]
         for e in entries:
             citations.append(Citation(text=e.get("title", ""), quote=e.get("quote", ""), source=e.get("source", "")))
         return "Here are the general policies I have information about:\n" + "\n".join(parts), citations
 
+    # Word-overlap matching: prefer matches in title so "quiz policy" -> Quiz Policies not Academic Concession
+    words = _topic_words(topic or "")
+    if not words:
+        words = {topic_lower}
+    best_score = 0
+    best_entry = None
     for e in entries:
         title = (e.get("title") or "").lower()
         summary = (e.get("summary") or "").lower()
+        # Substring match (original behavior) for exact phrasing
         if topic_lower in title or topic_lower in summary:
             text = e.get("summary", e.get("title", ""))
             citations.append(Citation(text=e.get("title", ""), quote=e.get("quote", text), source=e.get("source", "")))
             return text, citations
+        # Score: 2 per word in title, 1 per word in summary (prefer title)
+        score = 0
+        for w in words:
+            if w in title:
+                score += 2
+            if w in summary:
+                score += 1
+        if score > best_score:
+            best_score = score
+            best_entry = e
+    if best_entry and best_score > 0:
+        e = best_entry
+        text = e.get("summary", e.get("title", ""))
+        citations.append(Citation(text=e.get("title", ""), quote=e.get("quote", text), source=e.get("source", "")))
+        return text, citations
     return "No matching general policy found for that topic.", []
 
 

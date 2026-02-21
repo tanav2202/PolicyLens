@@ -36,7 +36,7 @@ INTENT_OPTIONS = [
 SYSTEM_PROMPT = """You are a router for a course policy QA system. Classify the user's intent and extract slots.
 
 Chitchat (no policy question): greeting, thanks, bye, help.
-Policy intents: due_date (when/where assignments), links (Canvas, Gradescope, etc.), general_policy (program rules: use slots.topic as a short keyword from the question, or null to list all), instructor_info, ta_list, coordinator, lecture_schedule, reference_material.
+Policy intents: due_date (when/where assignments; if the question names a specific assignment set slots.assessment to it, e.g. "hw3" for "homework 3" or "when is hw3 due?", "midterm_1" for midterm 1), links (Canvas, Gradescope, etc.), general_policy (program rules: use slots.topic as a short keyword, or null to list all), instructor_info, ta_list, coordinator, lecture_schedule, reference_material.
 Use out_of_scope only for questions clearly unrelated to the course or program.
 
 Output EXACTLY this JSON, nothing else:
