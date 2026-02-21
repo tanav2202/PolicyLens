@@ -37,6 +37,12 @@ class Citation(BaseModel):
     source: str = Field(..., description="Source identifier, e.g. cpsc_330_rules.md")
 
 
+class ExtractRequest(BaseModel):
+    """Request to extract policy content from a URL into markdown (and optionally facts)."""
+    course_name: str = Field(..., min_length=1, description="Display name for the course, e.g. CPSC 330")
+    url: str = Field(..., min_length=1, description="URL of the course policy page to scrape")
+
+
 class QueryResponse(BaseModel):
     """Response with answer and mandatory citations."""
     answer: str = Field(..., description="Answer assembled from facts DB only")

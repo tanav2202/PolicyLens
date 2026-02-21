@@ -4,20 +4,58 @@
 
 @layer base {
   html {
-    font-size: 18px;
+    font-size: 16px;
+    scroll-behavior: smooth;
+    background: #0a0a0c;
+    color-scheme: dark;
   }
   body {
-    @apply text-zinc-100 antialiased;
+    @apply font-sans text-zinc-100 antialiased min-h-screen;
+    background: #0a0a0c;
+  }
+  /* Dark theme native controls */
+  select, input, textarea, button {
+    color-scheme: dark;
   }
 }
 
 .animated-bg {
-  background: linear-gradient(135deg, #000 0%, #0a0a0a 25%, #000 50%, #0a0a0a 75%, #000 100%);
-  background-size: 400% 400%;
-  animation: bg-drift 12s ease-in-out infinite;
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, rgba(30,27,75,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 80% at 80% 20%, rgba(15,23,42,0.4) 0%, transparent 45%),
+    linear-gradient(180deg, #0c0c0f 0%, #0a0a0c 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
 }
 
-@keyframes bg-drift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes gradient-shift {
+  0%, 100% { opacity: 1; filter: hue-rotate(0deg); }
+  50% { opacity: 0.95; }
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 80% at 20% 80%, rgba(59, 7, 100, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 100% at 90% 50%, rgba(30, 58, 138, 0.08) 0%, transparent 50%);
+  animation: gradient-shift 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Preserve newlines in chat messages (user bubbles) */
+.chat-message {
+  word-break: break-word;
+}
+
+.chat-message:not(.chat-markdown) {
+  white-space: pre-wrap;
+}
+
+/* Dark-mode markdown in assistant messages */
+.chat-markdown {
+  --md-link: theme('colors.indigo.400');
+  --md-code-bg: theme('colors.zinc.700');
+}
+
+.chat-markdown p {
+  white-space: pre-wrap;
 }
