@@ -188,6 +188,31 @@ def lookup_ta_list(course: Optional[str] = None) -> tuple[str, list[Citation]]:
     return "TAs: " + ", ".join(names), citations
 
 
+def lookup_general_policy(topic: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
+    """Look up general (program-wide) policy by topic. Returns (answer_text, citations). Sources kept in DB only."""
+    facts, meta = _load_facts(course)
+    entries = _get_entries(facts, "general_policy", meta)
+    citations: list[Citation] = []
+    if not entries:
+        return "No general policy entries in database for this course yet.", []
+
+    topic_lower = (topic or "").lower().strip()
+    if not topic_lower:
+        parts = [f"• {e.get('title', '?')}" for e in entries]
+        for e in entries:
+            citations.append(Citation(text=e.get("title", ""), quote=e.get("quote", ""), source=e.get("source", "")))
+        return "Here are the general policies I have information about:\n" + "\n".join(parts), citations
+
+    for e in entries:
+        title = (e.get("title") or "").lower()
+        summary = (e.get("summary") or "").lower()
+        if topic_lower in title or topic_lower in summary:
+            text = e.get("summary", e.get("title", ""))
+            citations.append(Citation(text=e.get("title", ""), quote=e.get("quote", text), source=e.get("source", "")))
+            return text, citations
+    return "No matching general policy found for that topic.", []
+
+
 def lookup_links(link_type: Optional[str], course: Optional[str] = None) -> tuple[str, list[Citation]]:
     """Look up links. Returns (answer_text, citations)."""
     facts, meta = _load_facts(course)
@@ -238,6 +263,8 @@ def lookup_facts(intent: str, slots: dict, course: Optional[str] = None) -> tupl
             return lookup_ta_list(course)
         if intent == "links":
             return lookup_links(link_type, course)
+        if intent == "general_policy":
+            return lookup_general_policy(slots.get("topic"), course)
         if intent in ("lecture_schedule", "reference_material"):
             source = "course_rules.md"
             return (
@@ -250,7 +277,7 @@ def lookup_facts(intent: str, slots: dict, course: Optional[str] = None) -> tupl
 
     # MD fallback: if JSON returned empty/not-found, search markdown
     if (not answer or "not yet" in answer.lower() or "no " in answer.lower()[:10]) and intent in (
-        "due_date", "instructor_info", "coordinator", "ta_list", "links"
+        "due_date", "instructor_info", "coordinator", "ta_list", "links", "general_policy"
     ):
         from backend.services.md_search import search_md
         md_answer, md_citations, confidence = search_md(intent, slots, course)

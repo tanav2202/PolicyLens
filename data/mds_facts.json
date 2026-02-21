@@ -6,12 +6,390 @@
       "instructor_info": "instructors",
       "coordinator": "coordinator",
       "ta_list": "tas",
-      "links": "links"
-    }
+      "links": "links",
+      "general_policy": "general_policies"
+    },
+    "policy_scopes": [
+      "course",
+      "general"
+    ]
   },
   "due_dates": [],
   "instructors": [],
   "coordinator": [],
-  "links": [],
-  "tas": []
+  "tas": [],
+  "links": [
+    {
+      "name": "UBC MDS",
+      "url": "http://UBC-MDS.github.io",
+      "quote": "UBC MDS",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "About",
+      "url": "https://ubc-mds.github.io/about",
+      "quote": "About",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Our vision",
+      "url": "https://ubc-mds.github.io/vision",
+      "quote": "Our vision",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Our team",
+      "url": "https://ubc-mds.github.io/team",
+      "quote": "Our team",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "At a glance",
+      "url": "https://ubc-mds.github.io/img/schedule.pdf",
+      "quote": "At a glance",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Course Descriptions",
+      "url": "https://ubc-mds.github.io/descriptions",
+      "quote": "Course Descriptions",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Course Materials",
+      "url": "https://github.com/UBC-MDS/public",
+      "quote": "Course Materials",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Event Calendar",
+      "url": "https://ubc-mds.github.io/event-calendar",
+      "quote": "Event Calendar",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Calendar",
+      "url": "https://ubc-mds.github.io/calendar",
+      "quote": "Calendar",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Policies and Regulations",
+      "url": "https://ubc-mds.github.io/policies",
+      "quote": "Policies and Regulations",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Jobs",
+      "url": "https://ubc-mds.github.io/jobs",
+      "quote": "Jobs",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "About",
+      "url": "https://ubc-mds.github.io/capstone/about",
+      "quote": "About",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Partner info",
+      "url": "https://ubc-mds.github.io/capstone/partner_info",
+      "quote": "Partner info",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Student info",
+      "url": "https://ubc-mds.github.io/capstone/student_info",
+      "quote": "Student info",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Proposals",
+      "url": "https://ubc-mds.github.io/capstone/proposal",
+      "quote": "Proposals",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Timeline",
+      "url": "https://ubc-mds.github.io/capstone/timeline",
+      "quote": "Timeline",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Legal",
+      "url": "https://ubc-mds.github.io/capstone/guide-to-mutual-nda-ip",
+      "quote": "Legal",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Past projects",
+      "url": "https://ubc-mds.github.io/capstone/past_projects",
+      "quote": "Past projects",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Resources",
+      "url": "https://ubc-mds.github.io/resources",
+      "quote": "Resources",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Official website",
+      "url": "http://masterdatascience.ubc.ca/",
+      "quote": "Official website",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "UBC Policies and Regulations document",
+      "url": "http://www.calendar.ubc.ca/vancouver/?tree=3,0,0,0",
+      "quote": "UBC Policies and Regulations document",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "policy on academic concession",
+      "url": "https://www.calendar.ubc.ca/vancouver/index.cfm?tree=3,329,0,0",
+      "quote": "policy on academic concession",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "academic concession form",
+      "url": "https://github.com/UBC-MDS/UBC-MDS.github.io/blob/master/img/Template%20-%20In-Term%20Academic%20Concessions%20Self%20Declaration.pdf?raw=1",
+      "quote": "academic concession form",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "this page",
+      "url": "http://www.calendar.ubc.ca/vancouver/?tree=3,42,96,0",
+      "quote": "this page",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "project contribution multiplier",
+      "url": "https://github.com/UBC-MDS/public/blob/master/rubric/rubric_multiplier.md",
+      "quote": "project contribution multiplier",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "stated requirements",
+      "url": "https://ubc-mds.github.io/resources_pages/quiz/#digital-cheatsheets",
+      "quote": "stated requirements",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "quiz policy page",
+      "url": "https://ubc-mds.github.io/resources_pages/quiz/",
+      "quote": "quiz policy page",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "UBC Academic Misconduct policies",
+      "url": "http://www.calendar.ubc.ca/vancouver/index.cfm?tree=3,54,111,959",
+      "quote": "UBC Academic Misconduct policies",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "UBC’s approach to generative artificial intelligence tools in teaching and learning",
+      "url": "https://academicintegrity.ubc.ca/generative-ai/",
+      "quote": "UBC’s approach to generative artificial intelligence tools in teaching and learning",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "here",
+      "url": "https://senate.ubc.ca/policies-resources-support-student-success",
+      "quote": "here",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Email me",
+      "url": "mailto:info-mds@science.ubc.ca \"Email me\"",
+      "quote": "Email me",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/ubcmasterofdatascience \"Facebook\"",
+      "quote": "Facebook",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/UBC-MDS \"GitHub\"",
+      "quote": "GitHub",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/UBCMDS \"Twitter\"",
+      "quote": "Twitter",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "ubc-mds.github.io",
+      "url": "http://UBC-MDS.github.io",
+      "quote": "ubc-mds.github.io",
+      "source": "mds_rules.md"
+    },
+    {
+      "name": "beautiful-jekyll",
+      "url": "https://deanattali.com/beautiful-jekyll/",
+      "quote": "beautiful-jekyll",
+      "source": "mds_rules.md"
+    }
+  ],
+  "general_policies": [
+    {
+      "title": "Program Policies and Regulations",
+      "summary": "The Master of Data Science Policies and Regulations are part of the campus-wide UBC Policies and Regulations document. Below is a summary of those Policies and Regulations that students frequently ask about and that are specific to the Master of Data Science program.",
+      "quote": "The Master of Data Science Policies and Regulations are part of the campus-wide UBC Policies and Regulations document. Below is a summary of those Policies and Regulations that students frequently ask about and that are specific to the Master of Data Science program.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Attendance",
+      "summary": "Attendance in lectures and lab sessions is expected. Your ability to succeed in the program depends on engaging fully with the material, your instructors, and your peers.",
+      "quote": "Attendance in lectures and lab sessions is expected. Your ability to succeed in the program depends on engaging fully with the material, your instructors, and your peers.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Lecture recordings",
+      "summary": "We do not livestream or require instructors to record their lectures. If you miss a class you can catch up by reviewing lecture notes as well as by talking to peers and asking them to share their notes. When past lecture recordings are available, instructors may grant access to students who were absent for approved reasons only (e.g. illness, jury duty, etc.).",
+      "quote": "We do not livestream or require instructors to record their lectures. If you miss a class you can catch up by reviewing lecture notes as well as by talking to peers and asking them to share their notes. When past lecture recordings are available, instructors may grant access to students who were abs...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Academic Concession Policy",
+      "summary": "If you anticipate missing an assignment or quiz for a justified reason, you may request an academic concession before the deadline. According to the UBC Senate policy on academic concession, valid grounds for academic concessions include illness, conflicting responsibilities, or compassionate grounds. Compassionate grounds, as defined by the policy, include situations such as “a traumatic...",
+      "quote": "If you anticipate missing an assignment or quiz for a justified reason, you may request an academic concession before the deadline. According to the UBC Senate policy on academic concession, valid grounds for academic concessions include illness, conflicting responsibilities, or compassionate ground...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Requirements for Submitting an Academic Concession Request",
+      "summary": "To request an academic concession, students must fill out the academic concession form and include the following details:",
+      "quote": "To request an academic concession, students must fill out the academic concession form and include the following details:",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Submission Process",
+      "summary": "Once the form is completed, submit it via the Slack Course Coordinator Bot. In Slack, type `/cc` in any channel and press Enter to open the bot. Select “Submit concession” and follow the prompts to complete your submission. Please do **not** reach out to instructors for concession requests, as this may slow down the review process.",
+      "quote": "Once the form is completed, submit it via the Slack Course Coordinator Bot. In Slack, type `/cc` in any channel and press Enter to open the bot. Select “Submit concession” and follow the prompts to complete your submission. Please do **not** reach out to instructors for concession requests, as this ...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "General grading scheme",
+      "summary": "UBC uses a percentage grade system from 0 to 100%. The following table shows an unofficial conversion from percentage grades to letter grades (source: 2nd table of this page):",
+      "quote": "UBC uses a percentage grade system from 0 to 100%. The following table shows an unofficial conversion from percentage grades to letter grades (source: 2nd table of this page):",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Group project",
+      "summary": "Near the end of a group project, everyone is required to complete a team work reflection. This deliverable is an *individual* report intended to give you an avenue to present your viewpoint as to how the project went, how the group worked together, and your role in the group. Each group member must complete this form to report on the contributions of **yourself** and the other group members....",
+      "quote": "Near the end of a group project, everyone is required to complete a team work reflection. This deliverable is an *individual* report intended to give you an avenue to present your viewpoint as to how the project went, how the group worked together, and your role in the group. Each group member must ...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Failed courses and C/C+ grades",
+      "summary": "To pass an MDS course a student must score 60% or above. To graduate from MDS, a student must pass all courses, with no more than 3 credits in the 60%-67% range (C or C+). All MDS courses are worth 1 UBC credit except for Capstone, which is worth 6 credits. Thus, to graduate from MDS a student can get no more than 3 C/C+ grades in Blocks 1-6 and must also score at least 68% in Capstone.",
+      "quote": "To pass an MDS course a student must score 60% or above. To graduate from MDS, a student must pass all courses, with no more than 3 credits in the 60%-67% range (C or C+). All MDS courses are worth 1 UBC credit except for Capstone, which is worth 6 credits. Thus, to graduate from MDS a student can g...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Final course grades",
+      "summary": "With a few exceptions (communicated at the start of each course), grades are typically calculated as 50% labs and participation + 50% quizzes.",
+      "quote": "With a few exceptions (communicated at the start of each course), grades are typically calculated as 50% labs and participation + 50% quizzes.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Late Submissions",
+      "summary": "A late submission is defined as any work submitted after the deadline. For a late submission, the student will receive a 75% scaling of their grade for the first occurrence, 50% scaling of their grade for the second to fifth occurrences, and will receive a grade of 0 for subsequent occurrences. Late submissions are cumulative throughout the program.",
+      "quote": "A late submission is defined as any work submitted after the deadline. For a late submission, the student will receive a 75% scaling of their grade for the first occurrence, 50% scaling of their grade for the second to fifth occurrences, and will receive a grade of 0 for subsequent occurrences. Late...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Re-grading",
+      "summary": "If you have a question about the way your work was graded, please contact the relevant person based on the table below:",
+      "quote": "If you have a question about the way your work was graded, please contact the relevant person based on the table below:",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Quiz Policies",
+      "summary": "Unless otherwise specified, MDS quizzes are **closed** book, with the allowance of a **single-sided**, **one-page**, **letter-sized** cheatsheet that is uploaded as a PNG to PrairieLearn before the quiz. Ensure that your cheatsheet complies with all stated requirements.",
+      "quote": "Unless otherwise specified, MDS quizzes are **closed** book, with the allowance of a **single-sided**, **one-page**, **letter-sized** cheatsheet that is uploaded as a PNG to PrairieLearn before the quiz. Ensure that your cheatsheet complies with all stated requirements.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Plagiarism",
+      "summary": "Plagiarism, which is intellectual theft, occurs where an individual submits or presents the oral or written work of another person as his or her own and can include:",
+      "quote": "Plagiarism, which is intellectual theft, occurs where an individual submits or presents the oral or written work of another person as his or her own and can include:",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Code Plagiarism",
+      "summary": "Students must correctly cite any code that has been authored by someone else or by the student themselves for other assignments. Cases of code plagiarism may include, but are not limited to:",
+      "quote": "Students must correctly cite any code that has been authored by someone else or by the student themselves for other assignments. Cases of code plagiarism may include, but are not limited to:",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Use of Generative AI (GenAI)",
+      "summary": "Students are responsible for completing all assessments independently, demonstrating their understanding and mastery of the course material. Generative AI (GenAI) tools can be useful for tasks such as gathering information, brainstorming ideas, reviewing concepts, finding analogies, revising written work, or creating study questions. However, their use should be limited, and all submitted work...",
+      "quote": "Students are responsible for completing all assessments independently, demonstrating their understanding and mastery of the course material. Generative AI (GenAI) tools can be useful for tasks such as gathering information, brainstorming ideas, reviewing concepts, finding analogies, revising written...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Leaves of Absence (medical or personal)",
+      "summary": "Students in good academic standing may request long-term academic leave from the program for medical or personal reasons and return, within a year, to complete the MDS program. These requests must be discussed and submitted in writing to the MDS Leadership Team well in advance. Leaves can only start at the beginning of a term, which for MDS, is January 1st. It is also possible that the MDS...",
+      "quote": "Students in good academic standing may request long-term academic leave from the program for medical or personal reasons and return, within a year, to complete the MDS program. These requests must be discussed and submitted in writing to the MDS Leadership Team well in advance. Leaves can only start...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Program Withdrawal",
+      "summary": "Students may withdraw from the MDS program for medical or personal reasons. Depending on the timing of the withdrawal, full or partial tuition fee refunds may or may not be given. A request to withdraw from the program must be submitted in writing to the MDS Leadership Team.",
+      "quote": "Students may withdraw from the MDS program for medical or personal reasons. Depending on the timing of the withdrawal, full or partial tuition fee refunds may or may not be given. A request to withdraw from the program must be submitted in writing to the MDS Leadership Team.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Full-Time Commitment",
+      "summary": "The MDS program is approved by the UBC Senate as a full-time program. Hence, students must take the program on a full-time basis as part of their cohort and cannot complete the program on a part-time basis.",
+      "quote": "The MDS program is approved by the UBC Senate as a full-time program. Hence, students must take the program on a full-time basis as part of their cohort and cannot complete the program on a part-time basis.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "UBC’s Policies and Resources to Support Student Success",
+      "summary": "UBC provides resources to support student learning and to maintain healthy lifestyles but recognizes that sometimes crises arise and so there are additional resources to access including those for survivors of sexual violence. UBC values respect for the person and ideas of all members of the academic community. Harassment and discrimination are not tolerated nor is suppression of academic...",
+      "quote": "UBC provides resources to support student learning and to maintain healthy lifestyles but recognizes that sometimes crises arise and so there are additional resources to access including those for survivors of sexual violence. UBC values respect for the person and ideas of all members of the academi...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Section / Option Transfers",
+      "summary": "* Transfer between sections are not permitted.\n* Transfer between options are generally not permitted. In exceptional circumstances (*e.g.,* an external job offer requiring a different area of specialization), a transfer request may be considered if: a) a written rationale is submitted prior to the end of Block 2, b) the student is in a good academic standing, and c) the student had initially...",
+      "quote": "* Transfer between sections are not permitted.\n* Transfer between options are generally not permitted. In exceptional circumstances (*e.g.,* an external job offer requiring a different area of specialization), a transfer request may be considered if: a) a written rationale is submitted prior to the ...",
+      "source": "mds_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Policy Updates",
+      "summary": "We reserve the right to make changes to this policy during the program as required. Announcements for relevant changes will be made to the students via the appropriate Slack channels.",
+      "quote": "We reserve the right to make changes to this policy during the program as required. Announcements for relevant changes will be made to the students via the appropriate Slack channels.",
+      "source": "mds_rules.md",
+      "scope": "general"
+    }
+  ]
 }

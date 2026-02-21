@@ -29,23 +29,18 @@ INTENT_OPTIONS = [
     "links",
     "lecture_schedule",
     "reference_material",
+    "general_policy",
     "out_of_scope",
 ]
 
-SYSTEM_PROMPT = """You are a strict router for a course policy QA system. Your ONLY job is to classify the user's intent.
+SYSTEM_PROMPT = """You are a router for a course policy QA system. Classify the user's intent and extract slots.
 
-First, detect if the message is conversational chitchat (no policy question):
-- greeting: greetings, hellos, "how are you", "what's up", "how's it going", small talk
-- thanks: thanks, thank you, appreciation
-- bye: goodbye, see you, signing off
-- help: user asking what you can do or how to use the system
+Chitchat (no policy question): greeting, thanks, bye, help.
+Policy intents: due_date (when/where assignments), links (Canvas, Gradescope, etc.), general_policy (program rules: use slots.topic as a short keyword from the question, or null to list all), instructor_info, ta_list, coordinator, lecture_schedule, reference_material.
+Use out_of_scope only for questions clearly unrelated to the course or program.
 
-If it's a real question about course policy (due dates, instructors, TAs, coordinator, links, schedule, materials), use the policy intents and fill slots.
-
-Output EXACTLY this JSON structure, nothing else:
-{"intent": "<one of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope>", "slots": {"assessment": null or "hw1"|"hw2"|"midterm_1"|"syllabus_quiz"|etc, "topic": null or topic name, "role": null or "instructor"|"ta"|"coordinator", "section": null or "201"|"202"|"203"|"204", "link_type": null or "canvas"|"gradescope"|"ed_discussion"|"github"|etc}, "confidence": 0.0-1.0}
-
-Use out_of_scope only for off-topic or unclear policy questions. Use greeting/thanks/bye/help for chitchat."""
+Output EXACTLY this JSON, nothing else:
+{"intent": "<one of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, general_policy, out_of_scope>", "slots": {"assessment": null or string, "topic": null or short keyword for general_policy, "role": null, "section": null, "link_type": null}, "confidence": 0.0-1.0}"""
 
 USER_PROMPT_TEMPLATE = "Classify this question and extract slots. Output ONLY valid JSON, no markdown:\n\n{question}"
 

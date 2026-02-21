@@ -6,48 +6,497 @@
       "instructor_info": "instructors",
       "coordinator": "coordinator",
       "ta_list": "tas",
-      "links": "links"
-    }
+      "links": "links",
+      "general_policy": "general_policies"
+    },
+    "policy_scopes": [
+      "course",
+      "general"
+    ]
   },
   "due_dates": [
-    {"assessment": "syllabus_quiz", "due_date": "Jan 19 (extended), 11:59 pm", "where_find": "PrairieLearn (access through Canvas tab)", "where_submit": "Canvas tab", "quote": "Syllabus quiz | Jan 19 (extended), 11:59 pm | PrairieLearn (access through Canvas tab) | (access through Canvas tab)", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw1", "due_date": "Jan 12, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw1 | Jan 12 , 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw2", "due_date": "Jan 19, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw2 | Jan 19, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw3", "due_date": "Feb 02, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw3 | Feb 02, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw4", "due_date": "Feb 09, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw4 | Feb 09, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "midterm_1", "due_date": "Feb 9, 10, 11", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Midterm 1 | Feb 9, 10, 11 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw5", "due_date": "Mar 02, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "note": "excluded from drop lowest grade", "quote": "hw5 | Mar 02, 11:59 pm | GitHub repo | Gradescope | excluded from drop lowest grade", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw6", "due_date": "Mar 09, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw6 | Mar 09, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "midterm_2", "due_date": "Mar 16-17-18", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Midterm 2 | Mar 16-17-18 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw7", "due_date": "Mar 23, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw7 | Mar 23, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw8", "due_date": "Mar 30, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw8 | Mar 30, 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
-    {"assessment": "hw9", "due_date": "Apr 10, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "note": "No late submissions", "quote": "hw9 | Apr 10, 11:59 pm | GitHub repo | Gradescope | No late submissions", "source": "cpsc_330_rules.md"},
-    {"assessment": "final_exam", "due_date": "TBA", "where_find": "PrairieLearn (CBTF, in person)", "where_submit": "PrairieLearn (CBTF, in person)", "quote": "Final exam | TBA | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)", "source": "cpsc_330_rules.md"}
+    {
+      "assessment": "Syllabus quiz",
+      "due_date": "Jan 19 (extended), 11:59 pm",
+      "where_find": "PrairieLearn (access through Canvas tab)",
+      "where_submit": "(access through Canvas tab)",
+      "quote": "Syllabus quiz | Jan 19 (extended), 11:59 pm | PrairieLearn (access through Canvas tab) | (access through Canvas tab)",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw1",
+      "due_date": "Jan 12 , 11:59 pm",
+      "where_find": "GitHub repo",
+      "where_submit": "Gradescope",
+      "quote": "hw1 | Jan 12 , 11:59 pm | GitHub repo | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw2",
+      "due_date": "Jan 19, 11:59 pm",
+      "where_find": "GitHub repo",
+      "where_submit": "Gradescope",
+      "quote": "hw2 | Jan 19, 11:59 pm | GitHub repo | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw3",
+      "due_date": "Feb 02, 11:59 pm",
+      "where_find": "GitHub repo",
+      "where_submit": "Gradescope",
+      "quote": "hw3 | Feb 02, 11:59 pm | GitHub repo | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw4",
+      "due_date": "Feb 09, 11:59 pm",
+      "where_find": "GitHub repo",
+      "where_submit": "Gradescope",
+      "quote": "hw4 | Feb 09, 11:59 pm | GitHub repo | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "**Midterm 1**",
+      "due_date": "Feb 9, 10, 11",
+      "where_find": "PrairieLearn (CBTF, in person)",
+      "where_submit": "PrairieLearn (CBTF, in person)",
+      "quote": "**Midterm 1** | Feb 9, 10, 11 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw5",
+      "due_date": "Mar 02, 11:59 pm  **excluded from drop lowest grade**",
+      "where_find": "GitHub repo",
+      "where_submit": "Gradescope",
+      "quote": "hw5 | Mar 02, 11:59 pm  **excluded from drop lowest grade** | GitHub repo | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw6",
+      "due_date": "Mar 09, 11:59 pm",
+      "where_find": "GitHub repo[](https://github.com/new?template_name=hw6&template_owner=ubc-cpsc330)",
+      "where_submit": "Gradescope",
+      "quote": "hw6 | Mar 09, 11:59 pm | GitHub repo[](https://github.com/new?template_name=hw6&template_owner=ubc-cpsc330) | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "**Midterm 2**",
+      "due_date": "Mar 16-17-18",
+      "where_find": "PrairieLearn (CBTF, in person)",
+      "where_submit": "PrairieLearn (CBTF, in person)",
+      "quote": "**Midterm 2** | Mar 16-17-18 | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw7",
+      "due_date": "Mar 23, 11:59 pm",
+      "where_find": "GitHub repo[](https://github.com/new?template_name=hw7&template_owner=ubc-cpsc330)",
+      "where_submit": "Gradescope",
+      "quote": "hw7 | Mar 23, 11:59 pm | GitHub repo[](https://github.com/new?template_name=hw7&template_owner=ubc-cpsc330) | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw8",
+      "due_date": "Mar 30, 11:59 pm",
+      "where_find": "GitHub repo[](https://github.com/new?template_name=hw8&template_owner=ubc-cpsc330)",
+      "where_submit": "Gradescope",
+      "quote": "hw8 | Mar 30, 11:59 pm | GitHub repo[](https://github.com/new?template_name=hw8&template_owner=ubc-cpsc330) | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "hw9",
+      "due_date": "Apr 10, 11:59 pm  **No late submissions**",
+      "where_find": "GitHub repo[](https://github.com/new?template_name=hw9&template_owner=ubc-cpsc330)",
+      "where_submit": "Gradescope",
+      "quote": "hw9 | Apr 10, 11:59 pm  **No late submissions** | GitHub repo[](https://github.com/new?template_name=hw9&template_owner=ubc-cpsc330) | Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "assessment": "**Final exam**",
+      "due_date": "TBA",
+      "where_find": "PrairieLearn (CBTF, in person)",
+      "where_submit": "PrairieLearn (CBTF, in person)",
+      "quote": "**Final exam** | TBA | PrairieLearn (CBTF, in person) | PrairieLearn (CBTF, in person)",
+      "source": "cpsc_330_rules.md"
+    }
   ],
   "instructors": [
-    {"section": "201", "instructor": "Giulia Toti", "contact": "gtoti@cs.ubc.ca", "when": "Tue & Thu, 9:30–10:50", "where": "MCML 360", "quote": "201 | Giulia Toti | gtoti@cs.ubc.ca | Tue & Thu, 9:30–10:50 | MCML 360", "source": "cpsc_330_rules.md"},
-    {"section": "202", "instructor": "Firas Moosvi", "contact": "Ed Discussion", "when": "Tue & Thu, 15:30–16:50", "where": "DMP 310", "quote": "202 | Firas Moosvi | Ed Discussion | Tue & Thu, 15:30–16:50 | DMP 310", "source": "cpsc_330_rules.md"},
-    {"section": "203", "instructor": "Mehrdad Oveisi", "contact": "moveisi@cs.ubc.ca", "when": "Tue & Thu, 17:00–18:20", "where": "SWNG 222", "quote": "203 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 17:00–18:20 | SWNG 222", "source": "cpsc_330_rules.md"},
-    {"section": "204", "instructor": "Mehrdad Oveisi", "contact": "moveisi@cs.ubc.ca", "when": "Tue & Thu, 11:00–12:20", "where": "DMP 310", "quote": "204 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 11:00–12:20 | DMP 310", "source": "cpsc_330_rules.md"}
+    {
+      "section": "201",
+      "instructor": "Giulia Toti",
+      "contact": "gtoti@cs.ubc.ca",
+      "when": "Tue & Thu, 9:30–10:50",
+      "where": "MCML 360",
+      "quote": "201 | Giulia Toti | gtoti@cs.ubc.ca | Tue & Thu, 9:30–10:50 | MCML 360",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "section": "202",
+      "instructor": "Firas Moosvi",
+      "contact": "Ed Discussion",
+      "when": "Tue & Thu, 15:30–16:50",
+      "where": "DMP 310",
+      "quote": "202 | Firas Moosvi | Ed Discussion | Tue & Thu, 15:30–16:50 | DMP 310",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "section": "203",
+      "instructor": "Mehrdad Oveisi",
+      "contact": "moveisi@cs.ubc.ca",
+      "when": "Tue & Thu, 17:00–18:20",
+      "where": "SWNG 222",
+      "quote": "203 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 17:00–18:20 | SWNG 222",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "section": "204",
+      "instructor": "Mehrdad Oveisi",
+      "contact": "moveisi@cs.ubc.ca",
+      "when": "Tue & Thu, 11:00–12:20",
+      "where": "DMP 310",
+      "quote": "204 | Mehrdad Oveisi | moveisi@cs.ubc.ca | Tue & Thu, 11:00–12:20 | DMP 310",
+      "source": "cpsc_330_rules.md"
+    }
   ],
-  "coordinator": [
-    {"name": "Anca Barbu", "email": "cpsc330-admin@cs.ubc.ca", "purpose": "admin questions, extensions, academic concessions", "quote": "Anca Barbu (cpsc330-admin@cs.ubc.ca), please reach out to the course coordinator for: admin questions, extensions, academic concessions etc.", "source": "cpsc_330_rules.md"}
-  ],
+  "coordinator": [],
+  "tas": [],
   "links": [
-    {"name": "Course GitHub", "url": "https://github.com/UBC-CS/cpsc330-2025W2", "quote": "Course GitHub page", "source": "cpsc_330_rules.md"},
-    {"name": "Course Jupyter book", "url": "https://ubc-cs.github.io/cpsc330-2025W2", "quote": "Course Jupyter book", "source": "cpsc_330_rules.md"},
-    {"name": "Canvas", "url": "https://canvas.ubc.ca/courses/178047", "quote": "Canvas", "source": "cpsc_330_rules.md"},
-    {"name": "Ed Discussion", "url": "https://edstem.org/us/courses/89791/discussion", "quote": "Ed Discussion", "source": "cpsc_330_rules.md"},
-    {"name": "Gradescope", "url": "https://www.gradescope.ca/courses/34465", "quote": "Gradescope", "source": "cpsc_330_rules.md"},
-    {"name": "Course videos YouTube", "url": "https://www.youtube.com/playlist?list=PLHofvQE1VlGtZoAULxcHb7lOsMved0CuM", "quote": "Course videos YouTube channel", "source": "cpsc_330_rules.md"},
-    {"name": "Syllabus", "url": "syllabus.md", "quote": "Syllabus / administrative info", "source": "cpsc_330_rules.md"}
+    {
+      "name": "Giulia Toti",
+      "url": "https://www.gtoti.com/",
+      "quote": "Giulia Toti",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "gtoti@cs.ubc.ca",
+      "url": "mailto:gtoti@cs.ubc.ca",
+      "quote": "gtoti@cs.ubc.ca",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "MCML 360",
+      "url": "https://learningspaces.ubc.ca/classrooms/mcml-360/",
+      "quote": "MCML 360",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Firas Moosvi",
+      "url": "https://firas.moosvi.com",
+      "quote": "Firas Moosvi",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Ed Discussion",
+      "url": "https://edstem.org/us/courses/89791",
+      "quote": "Ed Discussion",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "DMP 310",
+      "url": "https://learningspaces.ubc.ca/classrooms/dmp-310/",
+      "quote": "DMP 310",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Mehrdad Oveisi",
+      "url": "https://www.cs.ubc.ca/people/mehrdad-oveisi",
+      "quote": "Mehrdad Oveisi",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "moveisi@cs.ubc.ca",
+      "url": "mailto:moveisi@cs.ubc.ca",
+      "quote": "moveisi@cs.ubc.ca",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "SWNG 222",
+      "url": "https://learningspaces.ubc.ca/classrooms/SWNG-222/",
+      "quote": "SWNG 222",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Mehrdad Oveisi",
+      "url": "https://www.cs.ubc.ca/people/mehrdad-oveisi",
+      "quote": "Mehrdad Oveisi",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "moveisi@cs.ubc.ca",
+      "url": "mailto:moveisi@cs.ubc.ca",
+      "quote": "moveisi@cs.ubc.ca",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "DMP 310",
+      "url": "https://learningspaces.ubc.ca/classrooms/dmp-310/",
+      "quote": "DMP 310",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "the MIT License",
+      "url": "https://spdx.org/licenses/MIT.html",
+      "quote": "the MIT License",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "quote": "the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Calendar",
+      "url": "https://htmlpreview.github.io/?https://github.com/UBC-CS/cpsc330/blob/master/docs/calendar.html",
+      "quote": "Calendar",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Course GitHub page",
+      "url": "https://github.com/UBC-CS/cpsc330-2025W2",
+      "quote": "Course GitHub page",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Course Jupyter book",
+      "url": "https://ubc-cs.github.io/cpsc330-2025W2",
+      "quote": "Course Jupyter book",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Canvas",
+      "url": "https://canvas.ubc.ca/courses/178047",
+      "quote": "Canvas",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Ed Discussion",
+      "url": "https://edstem.org/us/courses/89791/discussion",
+      "quote": "Ed Discussion",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Course videos YouTube channel",
+      "url": "https://www.youtube.com/playlist?list=PLHofvQE1VlGtZoAULxcHb7lOsMved0CuM",
+      "quote": "Course videos YouTube channel",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Other course documents",
+      "url": "https://github.com/UBC-CS/cpsc330-2025W2/tree/main/docs",
+      "quote": "Other course documents",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Calendar",
+      "url": "https://htmlpreview.github.io/?https://github.com/UBC-CS/cpsc330/blob/master/docs/calendar.html",
+      "quote": "Calendar",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Calendar",
+      "url": "https://htmlpreview.github.io/?https://github.com/UBC-CS/cpsc330/blob/master/docs/calendar.html",
+      "quote": "Calendar",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Canvas tab",
+      "url": "https://canvas.ubc.ca/courses/178047",
+      "quote": "Canvas tab",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Canvas tab",
+      "url": "https://canvas.ubc.ca/courses/178047",
+      "quote": "Canvas tab",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "GitHub repo",
+      "url": "https://github.com/new?template_name=hw1&template_owner=ubc-cpsc330",
+      "quote": "GitHub repo",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "GitHub repo",
+      "url": "https://github.com/new?template_name=hw2&template_owner=ubc-cpsc330",
+      "quote": "GitHub repo",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "GitHub repo",
+      "url": "https://github.com/new?template_name=hw3&template_owner=ubc-cpsc330",
+      "quote": "GitHub repo",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "GitHub repo",
+      "url": "https://github.com/new?template_name=hw4&template_owner=ubc-cpsc330",
+      "quote": "GitHub repo",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "GitHub repo",
+      "url": "https://github.com/new?template_name=hw5&template_owner=ubc-cpsc330",
+      "quote": "GitHub repo",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Gradescope",
+      "url": "https://www.gradescope.ca/courses/34465",
+      "quote": "Gradescope",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/playlist?list=PLHofvQE1VlGtZoAULxcHb7lOsMved0CuM",
+      "quote": "YouTube",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "Course Jupyter book",
+      "url": "https://ubc-cs.github.io/cpsc330-2025W2",
+      "quote": "Course Jupyter book",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "1.0",
+      "url": "https://youtu.be/-1hTcS5ZE4w",
+      "quote": "1.0",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "2.1",
+      "url": "https://youtu.be/YNT8n4cXu4A",
+      "quote": "2.1",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "2.2",
+      "url": "https://youtu.be/6eT5cLL-2Vc",
+      "quote": "2.2",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "2.3",
+      "url": "https://youtu.be/Hcf19Ij35rA",
+      "quote": "2.3",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "2.4",
+      "url": "https://youtu.be/KEtsfXn4w2E",
+      "quote": "2.4",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "3.1",
+      "url": "https://youtu.be/iS2hsRRlc2M",
+      "quote": "3.1",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "3.2",
+      "url": "https://youtu.be/h2AEobwcUQw",
+      "quote": "3.2",
+      "source": "cpsc_330_rules.md"
+    },
+    {
+      "name": "3.3",
+      "url": "https://youtu.be/4cv8VYonepA",
+      "quote": "3.3",
+      "source": "cpsc_330_rules.md"
+    }
   ],
-  "tas": [
-    {"name": "Ayanfe Adekanye"}, {"name": "Hadi Babalou"}, {"name": "Tanav Singh Bajaj"},
-    {"name": "Aryan Ballani"}, {"name": "Matthew Buchholz"}, {"name": "Jun He Cui"},
-    {"name": "Niki Duan"}, {"name": "Atabak Eghbal"}, {"name": "Eshed Gal"},
-    {"name": "Neo Ghassemi"}, {"name": "Zoe Harris"}, {"name": "Kanwal Mehreen"},
-    {"name": "Himanshu Mishra"}, {"name": "Kimia Rostin"}, {"name": "Sneha Sambandam"},
-    {"name": "Sohbat Sandhu"}, {"name": "Joseph Soo"}, {"name": "Carlos Vasquez Rios"}
+  "general_policies": [
+    {
+      "title": "License",
+      "summary": "© 2025 Varada Kolhatkar, Mike Gelbart, Giulia Toti",
+      "quote": "© 2025 Varada Kolhatkar, Mike Gelbart, Giulia Toti",
+      "source": "cpsc_330_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Reference Material",
+      "summary": "<details>\n  <summary>Click to expand!</summary>",
+      "quote": "<details>\n  <summary>Click to expand!</summary>",
+      "source": "cpsc_330_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Books",
+      "summary": "* A Course in Machine Learning (CIML) by Hal Daumé III \n* Introduction to Machine Learning with Python: A Guide for Data Scientists by Andreas C. Mueller and Sarah Guido.\n* An Introduction to Statistical\nLearning\n* The Elements of Statistical Learning (ESL)\n* Data Mining: Practical Machine Learning Tools and Techniques (PMLTT)\n* Artificial intelligence: A Modern Approach by Russell, Stuart and...",
+      "quote": "* A Course in Machine Learning (CIML) by Hal Daumé III \n* Introduction to Machine Learning with Python: A Guide for Data Scientists by Andreas C. Mueller and Sarah Guido.\n* An Introduction to Statistical\nLearning\n* The Elements of Statistical Learning (ESL)\n* Data Mining: Practical Machine Learning ...",
+      "source": "cpsc_330_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Online courses",
+      "summary": "* Machine Learning Crash Course\n* Machine Learning (Andrew Ng's famous Coursera course)\n* Foundations of Machine Learning online course from Bloomberg.\n* Machine Learning Exercises In Python, Part 1 (translation of Andrew Ng's course to Python, also relevant for DSCI 561, 572, 563)",
+      "quote": "* Machine Learning Crash Course\n* Machine Learning (Andrew Ng's famous Coursera course)\n* Foundations of Machine Learning online course from Bloomberg.\n* Machine Learning Exercises In Python, Part 1 (translation of Andrew Ng's course to Python, also relevant for DSCI 561, 572, 563)",
+      "source": "cpsc_330_rules.md",
+      "scope": "general"
+    },
+    {
+      "title": "Misc",
+      "summary": "* A Visual Introduction to Machine Learning (Part 1)\n* A Few Useful Things to Know About Machine Learning (an article by Pedro Domingos)\n* Metacademy (sort of like a concept map for machine learning, with suggested resources)\n* Machine Learning\n  101\n  (slides by Jason Mayes, engineer at Google)\n    \n</details>",
+      "quote": "* A Visual Introduction to Machine Learning (Part 1)\n* A Few Useful Things to Know About Machine Learning (an article by Pedro Domingos)\n* Metacademy (sort of like a concept map for machine learning, with suggested resources)\n* Machine Learning\n  101\n  (slides by Jason Mayes, engineer at Google)\n   ...",
+      "source": "cpsc_330_rules.md",
+      "scope": "general"
+    }
   ]
 }

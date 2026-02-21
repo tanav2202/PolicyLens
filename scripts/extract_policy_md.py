@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """
 CLI to extract policy website to Markdown.
+
 Usage:
-  python scripts/extract_policy_md.py <url> [--output data/] [--slug NAME]
-  python scripts/extract_policy_md.py https://ubc-mds.github.io/policies/
+  python scripts/extract_policy_md.py <url> [--output data/] [-s/--slug NAME]
+  python scripts/extract_policy_md.py https://ubc-mds.github.io/policies/ -s mds
+
+Pipeline (add more policies): (1) This script: URL -> {slug}_rules.md
+(2) Then: python scripts/extract_facts_from_md.py data/{slug}_rules.md -o data/{slug}_facts.json --slug "Display Name"
+So new policy pages are generalisable: fetch MD, then run extract_facts_from_md on the new file.
 """
 import argparse
 import sys

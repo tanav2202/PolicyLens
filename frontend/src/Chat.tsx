@@ -63,14 +63,7 @@ export default function Chat() {
               return next
             })
           } else if (payload.type === 'citations' && payload.citations?.length) {
-            const sources = payload.citations.map((c: { source?: string }) => c.source).filter(Boolean).join(', ')
-            setMessages((m) => {
-              const next = [...m]
-              const last = next[next.length - 1]
-              if (last?.role === 'assistant')
-                next[next.length - 1] = { ...last, content: last.content + `\n\nSources: ${sources}` }
-              return next
-            })
+            // Citations kept in DB/API only; do not show sources in user-facing output
           }
         } catch {
           // ignore parse errors for partial chunks
