@@ -1,0 +1,17 @@
+{
+  "_schema": {
+    "course_name": "MDS",
+    "key_map": {
+      "due_date": "due_dates",
+      "instructor_info": "instructors",
+      "coordinator": "coordinator",
+      "ta_list": "tas",
+      "links": "links"
+    }
+  },
+  "due_dates": [],
+  "instructors": [],
+  "coordinator": [],
+  "links": [],
+  "tas": []
+}

@@ -17,7 +17,7 @@ class ExtractedSlots(BaseModel):
 
 class IntentClassification(BaseModel):
     """Strict JSON schema for Ollama output - intent classification only."""
-    intent: str = Field(..., description="One of: due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope")
+    intent: str = Field(..., description="One of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope")
     slots: ExtractedSlots = Field(default_factory=ExtractedSlots)
     confidence: float = Field(ge=0, le=1, default=1.0)
 
@@ -27,6 +27,7 @@ class IntentClassification(BaseModel):
 class QueryRequest(BaseModel):
     """User query for course policy QA."""
     question: str = Field(..., min_length=1, max_length=2000)
+    course: Optional[str] = Field(None, description="Course name, e.g. CPSC 330, MDS. Used to select facts DB file.")
 
 
 class Citation(BaseModel):

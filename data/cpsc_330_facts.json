@@ -1,4 +1,14 @@
 {
+  "_schema": {
+    "course_name": "CPSC 330",
+    "key_map": {
+      "due_date": "due_dates",
+      "instructor_info": "instructors",
+      "coordinator": "coordinator",
+      "ta_list": "tas",
+      "links": "links"
+    }
+  },
   "due_dates": [
     {"assessment": "syllabus_quiz", "due_date": "Jan 19 (extended), 11:59 pm", "where_find": "PrairieLearn (access through Canvas tab)", "where_submit": "Canvas tab", "quote": "Syllabus quiz | Jan 19 (extended), 11:59 pm | PrairieLearn (access through Canvas tab) | (access through Canvas tab)", "source": "cpsc_330_rules.md"},
     {"assessment": "hw1", "due_date": "Jan 12, 11:59 pm", "where_find": "GitHub repo", "where_submit": "Gradescope", "quote": "hw1 | Jan 12 , 11:59 pm | GitHub repo | Gradescope", "source": "cpsc_330_rules.md"},
@@ -33,23 +43,11 @@
     {"name": "Syllabus", "url": "syllabus.md", "quote": "Syllabus / administrative info", "source": "cpsc_330_rules.md"}
   ],
   "tas": [
-    {"name": "Ayanfe Adekanye"},
-    {"name": "Hadi Babalou"},
-    {"name": "Tanav Singh Bajaj"},
-    {"name": "Aryan Ballani"},
-    {"name": "Matthew Buchholz"},
-    {"name": "Jun He Cui"},
-    {"name": "Niki Duan"},
-    {"name": "Atabak Eghbal"},
-    {"name": "Eshed Gal"},
-    {"name": "Neo Ghassemi"},
-    {"name": "Zoe Harris"},
-    {"name": "Kanwal Mehreen"},
-    {"name": "Himanshu Mishra"},
-    {"name": "Kimia Rostin"},
-    {"name": "Sneha Sambandam"},
-    {"name": "Sohbat Sandhu"},
-    {"name": "Joseph Soo"},
-    {"name": "Carlos Vasquez Rios"}
+    {"name": "Ayanfe Adekanye"}, {"name": "Hadi Babalou"}, {"name": "Tanav Singh Bajaj"},
+    {"name": "Aryan Ballani"}, {"name": "Matthew Buchholz"}, {"name": "Jun He Cui"},
+    {"name": "Niki Duan"}, {"name": "Atabak Eghbal"}, {"name": "Eshed Gal"},
+    {"name": "Neo Ghassemi"}, {"name": "Zoe Harris"}, {"name": "Kanwal Mehreen"},
+    {"name": "Himanshu Mishra"}, {"name": "Kimia Rostin"}, {"name": "Sneha Sambandam"},
+    {"name": "Sohbat Sandhu"}, {"name": "Joseph Soo"}, {"name": "Carlos Vasquez Rios"}
   ]
 }

@@ -16,8 +16,12 @@ from ollama import Client
 from backend.config import OLLAMA_MODEL, OLLAMA_TEMPERATURE, OLLAMA_HOST
 from backend.models import IntentClassification, ExtractedSlots
 
-# Intent options - LLM must pick one
+# Intent options - LLM must pick one (chitchat + policy + out_of_scope)
 INTENT_OPTIONS = [
+    "greeting",
+    "thanks",
+    "bye",
+    "help",
     "due_date",
     "instructor_info",
     "ta_list",
@@ -28,15 +32,20 @@ INTENT_OPTIONS = [
     "out_of_scope",
 ]
 
-SYSTEM_PROMPT = """You are a strict router for a course policy QA system. Your ONLY job is to classify intent and extract slots.
+SYSTEM_PROMPT = """You are a strict router for a course policy QA system. Your ONLY job is to classify the user's intent.
 
-ALLOWED: Output valid JSON with intent and slots.
-NOT ALLOWED: Do NOT generate factual answers. Do NOT invent dates, weights, policies, or emails.
+First, detect if the message is conversational chitchat (no policy question):
+- greeting: greetings, hellos, "how are you", "what's up", "how's it going", small talk
+- thanks: thanks, thank you, appreciation
+- bye: goodbye, see you, signing off
+- help: user asking what you can do or how to use the system
+
+If it's a real question about course policy (due dates, instructors, TAs, coordinator, links, schedule, materials), use the policy intents and fill slots.
 
 Output EXACTLY this JSON structure, nothing else:
-{"intent": "<one of: due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope>", "slots": {"assessment": null or "hw1"|"hw2"|"midterm_1"|"syllabus_quiz"|etc, "topic": null or topic name, "role": null or "instructor"|"ta"|"coordinator", "section": null or "201"|"202"|"203"|"204", "link_type": null or "canvas"|"gradescope"|"ed_discussion"|"github"|etc}, "confidence": 0.0-1.0}
+{"intent": "<one of: greeting, thanks, bye, help, due_date, instructor_info, ta_list, coordinator, links, lecture_schedule, reference_material, out_of_scope>", "slots": {"assessment": null or "hw1"|"hw2"|"midterm_1"|"syllabus_quiz"|etc, "topic": null or topic name, "role": null or "instructor"|"ta"|"coordinator", "section": null or "201"|"202"|"203"|"204", "link_type": null or "canvas"|"gradescope"|"ed_discussion"|"github"|etc}, "confidence": 0.0-1.0}
 
-If the question is off-topic or unclear, use intent "out_of_scope" and confidence < 0.5."""
+Use out_of_scope only for off-topic or unclear policy questions. Use greeting/thanks/bye/help for chitchat."""
 
 USER_PROMPT_TEMPLATE = "Classify this question and extract slots. Output ONLY valid JSON, no markdown:\n\n{question}"
 
