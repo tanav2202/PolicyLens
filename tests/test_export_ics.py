@@ -44,3 +44,11 @@ def test_export_ics_mds_empty_dates():
     assert b"VCALENDAR" in resp.content
     # MDS has empty due_dates - valid but minimal ICS
     assert resp.content.count(b"BEGIN:VEVENT") == 0
+
+
+def test_export_ics_generic_filter_fallback():
+    """Generic filter like 'homework' matches no specific entry; fall back to all entries."""
+    resp = client.get("/export/ics", params={"course": "CPSC 330", "assessments": "homework"})
+    assert resp.status_code == 200
+    assert b"VCALENDAR" in resp.content
+    assert resp.content.count(b"BEGIN:VEVENT") >= 1

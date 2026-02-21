@@ -109,7 +109,8 @@ def get_due_dates_for_ics_export(
             norm_a = _normalize_assessment(str(a).replace("*", "").strip())
             if norm_a and norm_a in norm_filter:
                 filtered.append(e)
-        entries = filtered
+        if filtered:
+            entries = filtered
 
     return (entries, course_name, year)
 
