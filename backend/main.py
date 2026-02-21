@@ -17,8 +17,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from backend.config import discover_courses
-from backend.models import QueryRequest, QueryResponse
+from backend.config import DATA_DIR, discover_courses
+from backend.models import ExtractRequest, QueryRequest, QueryResponse
 from backend.services.ollama_router import classify_intent
 from backend.services.facts_db import lookup_facts
 from backend.services.md_search import get_fallback_message
@@ -49,6 +49,7 @@ def root():
             "courses": "GET /courses",
             "query": "POST /query",
             "query_stream": "POST /query/stream",
+            "extract": "POST /extract",
             "policy": "GET /policy",
         },
     }
@@ -145,7 +146,6 @@ def _process_query(question: str, course: Optional[str]) -> QueryResponse:
             refused=False,
         )
 
-<<<<<<< Updated upstream
     # Chitchat intents: LLM detected greeting/thanks/bye/help; respond with fixed safe reply
     if classification.intent in _CHITCHAT_RESPONSES:
         choices = _CHITCHAT_RESPONSES[classification.intent]
@@ -155,20 +155,6 @@ def _process_query(question: str, course: Optional[str]) -> QueryResponse:
             intent=classification.intent,
             slots_used=classification.slots.model_dump(exclude_none=True),
             refused=False,
-=======
-    # 2. Lookup facts from DB only (no LLM factual generation), filtered by course
-    slots_dict = classification.slots.model_dump(exclude_none=True)
-    try:
-        answer, citations = lookup_facts(classification.intent, slots_dict, course=req.course)
-    except FileNotFoundError:
-        return QueryResponse(
-            answer="",
-            citations=[],
-            intent=classification.intent,
-            slots_used=slots_dict,
-            refused=True,
-            refusal_reason="No data for this course.",
->>>>>>> Stashed changes
         )
 
     slots_dict = classification.slots.model_dump(exclude_none=True)
@@ -269,6 +255,32 @@ async def query_stream(req: QueryRequest):
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@app.post("/extract")
+def extract_policy(req: ExtractRequest):
+    """
+    Extract policy page from URL to markdown using extract_policy_md logic.
+    Writes to data/{slug}_rules.md. Does not create _facts.json; that may require a separate step.
+    """
+    url = req.url.strip()
+    course_name = req.course_name.strip()
+    if not url or not course_name:
+        return {"ok": False, "error": "course_name and url are required"}
+    slug = course_name.replace(" ", "_").lower().replace("-", "_")
+    try:
+        from backend.exceptions import PolicyFetchError
+        from backend.services.web_extractor import extract_policy_to_markdown
+        path = extract_policy_to_markdown(url, DATA_DIR, slug=slug)
+        return {"ok": True, "path": str(path), "message": f"Extracted to {path.name}. You may need to build facts for this course."}
+    except ImportError as e:
+        return {"ok": False, "error": f"Extract dependencies missing. Install: pip install markdownify beautifulsoup4. {e}"}
+    except Exception as e:
+        err = getattr(e, "message", str(e))
+        code = getattr(e, "code", None)
+        if code:
+            return {"ok": False, "error": f"{code}: {err}"}
+        return {"ok": False, "error": str(e)}
 
 
 @app.get("/policy")

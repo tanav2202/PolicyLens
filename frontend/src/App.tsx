@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { PanelLeft, PanelRight } from 'lucide-react'
 import Chat from './Chat'
 import AnimatedBackground from './AnimatedBackground'
 import Sidebar, { type ChatItem } from './Sidebar'
@@ -85,21 +87,17 @@ function App() {
     <div className="min-h-screen flex flex-col relative">
       <AnimatedBackground />
       <header className="relative z-10 px-4 py-4 sm:px-6 border-b border-zinc-800/50 flex items-center gap-3">
-        <button
+        <motion.button
           type="button"
           onClick={() => setSidebarOpen((o) => !o)}
           className="rounded-lg p-2 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"
           title={sidebarOpen ? 'Hide sidebar' : 'Show sidebar'}
           aria-label={sidebarOpen ? 'Hide sidebar' : 'Show sidebar'}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            {sidebarOpen ? (
-              <path d="M15 19l-7-7 7-7" />
-            ) : (
-              <path d="M9 5l7 7-7 7" />
-            )}
-          </svg>
-        </button>
+          {sidebarOpen ? <PanelLeft className="h-5 w-5" /> : <PanelRight className="h-5 w-5" />}
+        </motion.button>
         <div className="flex items-baseline gap-3">
           <h1 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white">
             PolicyLens

@@ -27,11 +27,7 @@ class IntentClassification(BaseModel):
 class QueryRequest(BaseModel):
     """User query for course policy QA."""
     question: str = Field(..., min_length=1, max_length=2000)
-<<<<<<< Updated upstream
     course: Optional[str] = Field(None, description="Course name, e.g. CPSC 330, MDS. Used to select facts DB file.")
-=======
-    course: Optional[str] = Field(default="CPSC 330", description="Course to filter by, e.g. 'CPSC 330', 'MDS'")
->>>>>>> Stashed changes
 
 
 class Citation(BaseModel):
@@ -39,6 +35,12 @@ class Citation(BaseModel):
     text: str = Field(..., description="The factual answer text")
     quote: str = Field(..., description="Exact quote from source document")
     source: str = Field(..., description="Source identifier, e.g. cpsc_330_rules.md")
+
+
+class ExtractRequest(BaseModel):
+    """Request to extract policy content from a URL into markdown (and optionally facts)."""
+    course_name: str = Field(..., min_length=1, description="Display name for the course, e.g. CPSC 330")
+    url: str = Field(..., min_length=1, description="URL of the course policy page to scrape")
 
 
 class QueryResponse(BaseModel):
