@@ -1,5 +1,6 @@
 {
   "_schema": {
+    "academic_year": 2026,
     "course_name": "CPSC 330",
     "key_map": {
       "due_date": "due_dates",

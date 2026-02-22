@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Send, BookOpen, AlertCircle, Loader2, FileDown, ChevronDown } from 'lucide-react'
 
-export type Message = { role: 'user' | 'assistant'; content: string }
+export type Message = { role: 'user' | 'assistant'; content: string; intent?: string; slots_used?: Record<string, unknown> }
 
 const API_BASE = '/api'
 const COURSE_NOT_FOUND = 'Course not found'
@@ -146,6 +146,8 @@ export default function Chat({ messages, onMessagesChange }: Props) {
       if (!reader) throw new Error('No response body')
       let buffer = ''
       let content = ''
+      let doneIntent: string | undefined
+      let doneSlots: Record<string, unknown> | undefined
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
@@ -164,12 +166,13 @@ export default function Chat({ messages, onMessagesChange }: Props) {
               if (sources) content += `\n\nSources: ${sources}`
               setStreamingReply(content)
             } else if (data.type === 'done') {
-              // stream finished
+              doneIntent = data.intent
+              doneSlots = data.slots_used
             }
           } catch (_) {}
         }
       }
-      onMessagesChange([...messages, userMsg, { role: 'assistant', content }])
+      onMessagesChange([...messages, userMsg, { role: 'assistant', content, intent: doneIntent, slots_used: doneSlots }])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong')
       onMessagesChange([...messages, userMsg, { role: 'assistant', content: 'Sorry, something went wrong.' }])
@@ -249,30 +252,47 @@ export default function Chat({ messages, onMessagesChange }: Props) {
           <motion.div
             key={`${i}-${msg.role}-${msg.content.slice(0, 20)}`}
             layout
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
             initial={{ opacity: 0, y: 12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
-            {msg.role === 'user' ? (
-              <motion.div
-                className="max-w-[85%] rounded-2xl rounded-br-md px-4 py-3 text-[15px] leading-relaxed chat-message bg-white/5 backdrop-blur-md text-white"
-                whileHover={{ scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              >
-                {msg.content}
-              </motion.div>
-            ) : (
-              <motion.div
-                className="max-w-[90%] text-[15px] leading-relaxed chat-message chat-markdown text-zinc-300"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            <div className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              {msg.role === 'user' ? (
+                <motion.div
+                  className="max-w-[85%] rounded-2xl rounded-br-md px-4 py-3 text-[15px] leading-relaxed chat-message bg-white/5 backdrop-blur-md text-white"
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                >
                   {msg.content}
-                </ReactMarkdown>
-              </motion.div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="max-w-[90%] text-[15px] leading-relaxed chat-message chat-markdown text-zinc-300"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                    {msg.content}
+                  </ReactMarkdown>
+                </motion.div>
+              )}
+            </div>
+            {msg.role === 'assistant' && msg.intent === 'due_date' && course && (
+              <a
+                href={
+                  msg.slots_used?.assessment
+                    ? `${API_BASE}/export/ics?course=${encodeURIComponent(course)}&assessments=${encodeURIComponent(String(msg.slots_used.assessment))}`
+                    : `${API_BASE}/export/ics?course=${encodeURIComponent(course)}`
+                }
+                download="policy_dates.ics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 underline"
+              >
+                Add to Calendar
+              </a>
             )}
           </motion.div>
         ))}
